@@ -22,18 +22,21 @@ const postSchema = new mongoose.Schema({
 
 const Post = mongoose.model('Post', postSchema);
 
-// Set up body-parser and EJS
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
-
 app.set('view engine', 'ejs');
-app.use('expressLayouts');
+app.use(expressLayouts);
 app.set('layout', 'layouts/main');
 
 // Routes
-app.get('/', async (req, res) => {
+
+app.get('/', (req, res) => {
+    res.render('dashboard');
+});
+
+app.get('/posts', async (req, res) => {
     const posts = await Post.find();
-    res.render('home', { posts: posts });
+    res.render('posts/index', { posts: posts });
 });
 
 app.get('/posts/:id', async (req, res) => {
