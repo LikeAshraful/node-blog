@@ -2,8 +2,13 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const expressLayouts = require('express-ejs-layouts');
-const app = express();
+const session = require('express-session');
+const flash = require('connect-flash');
+const passport = require('passport');
 require('dotenv').config();
+require('./config/passport'); // Passport configuration
+
+const app = express();
 
 // Connect to MongoDB
 mongoose.connect('mongodb://localhost:27017/blogDB');
@@ -26,9 +31,35 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
+
 app.set('layout', 'layouts/main');
 
+
+// Session and Passport middleware
+app.use(session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+app.use((req, res, next) => {
+    res.locals.currentUser = req.user;
+    res.locals.success_msg = req.flash('success_msg');
+    res.locals.error_msg = req.flash('error_msg');
+    res.locals.error = req.flash('error');
+    next();
+});
+
+const { ensureAuthenticated } = require('./middlewares/auth');
+
 // Routes
+const authRoutes = require('./routes/auth');
+app.use('/', authRoutes);
+
+
 app.get('/', (req, res) => {
     res.render('dashboard');
 });
@@ -43,11 +74,11 @@ app.get('/posts/:id', async (req, res) => {
     res.render('post', { post: post });
 });
 
-app.get('/post/create', (req, res) => {
+app.get('/post/create', ensureAuthenticated, (req, res) => {
     res.render('posts/create');
 });
 
-app.post('/post/store', async (req, res) => {
+app.post('/post/store', ensureAuthenticated, async (req, res) => {
     const post = new Post({
         title: req.body.postTitle,
         content: req.body.postContent,
