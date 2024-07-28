@@ -11,10 +11,17 @@ router.get('/register', (req, res) => {
 
 router.post('/register', async (req, res) => {
     try {
-        const { username, password } = req.body;
-        const user = new User({ username, password });
+        const { username, password, email, phone } = req.body;
+        const user = new User({ username, password, email, phone });
         await user.save();
-        res.redirect('/login');
+
+        req.login(user, err => {
+            if (err) return next(err);
+            return res.redirect('/');
+        });
+        // res.redirect('/login');
+
+
     } catch (err) {
         res.status(500).send('Error registering new user');
     }
@@ -35,7 +42,7 @@ router.post('/login', passport.authenticate('local', {
 router.get('/logout', (req, res) => {
     req.logout(err => {
         if (err) return next(err);
-        res.redirect('/');
+        res.redirect('/login');
     });
 });
 

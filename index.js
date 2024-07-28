@@ -34,10 +34,9 @@ app.use(expressLayouts);
 
 app.set('layout', 'layouts/main');
 
-
 // Session and Passport middleware
 app.use(session({
-    secret: 'your_secret_key',
+    secret: process.env.PASSPORT_SECRET,
     resave: false,
     saveUninitialized: false
 }));
@@ -46,7 +45,6 @@ app.use(passport.session());
 app.use(flash());
 
 app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
@@ -54,6 +52,12 @@ app.use((req, res, next) => {
 });
 
 const { ensureAuthenticated } = require('./middlewares/auth');
+app.use((req, res, next) => {
+    if (req.path === '/login' || req.path === '/register') {
+        return next();
+    }
+    ensureAuthenticated(req, res, next);
+});
 
 // Routes
 const authRoutes = require('./routes/auth');
@@ -61,7 +65,7 @@ app.use('/', authRoutes);
 
 
 app.get('/', (req, res) => {
-    res.render('dashboard');
+    res.render('dashboard', {title : 'Dashboard'});
 });
 
 app.get('/posts', async (req, res) => {

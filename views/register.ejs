@@ -7,6 +7,7 @@
     </header>
     <div class="card-content">
       <form action="/register" method="post">
+
         <div class="field spaced">
           <label class="label">User Name</label>
           <div class="control icons-left">
@@ -19,6 +20,38 @@
             />
             <span class="icon is-small left"
               ><i class="mdi mdi-account"></i
+            ></span>
+          </div>
+        </div>
+
+        <div class="field spaced">
+          <label class="label">Email</label>
+          <div class="control icons-left">
+            <input
+              class="input"
+              type="email"
+              name="email"
+              placeholder="Email"
+              autocomplete="email"
+            />
+            <span class="icon is-small left"
+              ><i class="mdi mdi-mail"></i
+            ></span>
+          </div>
+        </div>
+
+        <div class="field spaced">
+          <label class="label">Phone No</label>
+          <div class="control icons-left">
+            <input
+              class="input"
+              type="text"
+              name="phone"
+              placeholder="Phone No"
+              autocomplete="phone"
+            />
+            <span class="icon is-small left"
+              ><i class="mdi mdi-phone"></i
             ></span>
           </div>
         </div>
@@ -37,17 +70,8 @@
               ><i class="mdi mdi-asterisk"></i
             ></span>
           </p>
-        </div>
-  
-        <div class="field spaced">
-          <div class="control">
-            <label class="checkbox"
-              ><input type="checkbox" name="remember" value="1" checked />
-              <span class="check"></span>
-              <span class="control-label">Remember</span>
-            </label>
-          </div>
-        </div>
+        </div> 
+        
   
         <hr />
   
@@ -56,7 +80,7 @@
             <button type="submit" class="button blue">Sign Up</button>
           </div>
           <div class="control">
-            <a href="/login" class="button"> Already Have account? </a>
+            <a href="/login" class="button"> Already Have account? Login</a>
           </div>
         </div>
       </form>
