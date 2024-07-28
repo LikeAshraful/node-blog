@@ -29,7 +29,6 @@ app.use(expressLayouts);
 app.set('layout', 'layouts/main');
 
 // Routes
-
 app.get('/', (req, res) => {
     res.render('dashboard');
 });
@@ -44,11 +43,11 @@ app.get('/posts/:id', async (req, res) => {
     res.render('post', { post: post });
 });
 
-app.get('/compose', (req, res) => {
-    res.render('compose');
+app.get('/post/create', (req, res) => {
+    res.render('posts/create');
 });
 
-app.post('/compose', async (req, res) => {
+app.post('/post/store', async (req, res) => {
     const post = new Post({
         title: req.body.postTitle,
         content: req.body.postContent,
@@ -56,7 +55,7 @@ app.post('/compose', async (req, res) => {
         tags: req.body.postTags.split(',').map(item => item.trim())
     });
     await post.save();
-    res.redirect('/');
+    res.redirect('/posts');
 });
 
 app.get('/categories/:category', async (req, res) => {

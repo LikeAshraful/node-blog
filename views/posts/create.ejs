@@ -1,0 +1,75 @@
+<section class="section main-section">
+  <div class="card mb-6">
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-ballot"></i></span>
+        Create New Post
+      </p>
+    </header>
+    <div class="card-content">
+      <form action="/post/store" method="post">
+        <div class="field">
+          <div class="field-body">
+            <div class="field">
+              <label class="label">Title</label>
+
+              <div class="control">
+                <input
+                  class="input"
+                  type="text"
+                  name="postTitle"
+                  placeholder="Post Title"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Category</label>
+          <div class="control">
+            <div class="select">
+              <select name="postCategories">
+                <option>Business development</option>
+                <option>Marketing</option>
+                <option>Sales</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Post Detail</label>
+          <div class="control">
+            <textarea
+              class="textarea"
+              name="postContent"
+              placeholder="Post Detail"
+            ></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Tags</label>
+          <div class="control">
+            <input
+              class="input"
+              type="text"
+              name="postTags"
+              placeholder="Tags"
+            />
+          </div>
+        </div>
+
+        <div class="field grouped">
+          <div class="control">
+            <button type="submit" class="button green">Submit</button>
+          </div>
+          <div class="control">
+            <button type="reset" class="button red">Reset</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

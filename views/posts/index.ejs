@@ -3,27 +3,12 @@
     class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
   >
     <h1 class="title">Posts</h1>
-    <button class="button light">Create New Post</button>
+    <a href="/post/create" class="button light">Create New Post</a>
   </div>
 </section>
 
 <section class="section main-section">
-  <div class="notification blue">
-    <div
-      class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
-    >
-      <div>
-        <span class="icon"><i class="mdi mdi-buffer"></i></span>
-        <b>Post List</b>
-      </div>
-      <button
-        type="button"
-        class="button small textual --jb-notification-dismiss"
-      >
-        Dismiss
-      </button>
-    </div>
-  </div>
+
   <div class="card has-table">
     <div class="card-content">
       <table>
@@ -100,7 +85,7 @@
           <% }); %>
         </tbody>
       </table>
-      
+
       <!-- <div class="table-pagination">
         <div class="flex items-center justify-between">
           <div class="buttons">
