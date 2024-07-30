@@ -1,15 +1,12 @@
 
     <h1><%= post.title %></h1>
     <p><%= post.content %></p>
-    <p>Categories: 
-        <% post.categories.forEach(function(category) { %>
-            <span><%= category %></span>
-        <% }); %>
+    <p>
+        <% post?.category?.title %>
     </p>
     <p>Tags: 
         <% post.tags.forEach(function(tag) { %>
             <span><%= tag %></span>
         <% }); %>
     </p>
-    <a href="/">Back to Home</a>
 

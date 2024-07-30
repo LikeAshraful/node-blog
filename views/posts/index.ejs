@@ -49,9 +49,7 @@
             <td><a href="/posts/<%= post._id %>"><%= post.title %></a></td>
             <td><%= post.content.substring(0, 100) %>...</td>
             <td>
-              Categories: <% post.categories.forEach(function(category) { %>
-              <a href="/categories/<%= category %>"><%= category %></a>
-              <% }); %>
+              <%= post.category ? post.category.title : '' %>
             </td>
             <td>
               Tags: <% post.tags.forEach(function(tag) { %>
@@ -64,7 +62,7 @@
             </small>
             </td>
             <td class="actions-cell">
-              <div class="buttons right nowrap">
+              <div class="buttons nowrap">
                 <a
                   class="button small blue --jb-modal"
                   href="/posts/<%= post._id %>"

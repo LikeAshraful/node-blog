@@ -29,10 +29,10 @@
           <label class="label">Category</label>
           <div class="control">
             <div class="select">
-              <select name="postCategories">
-                <option>Business development</option>
-                <option>Marketing</option>
-                <option>Sales</option>
+              <select name="postCategory">
+                <% categories.forEach(category => { %>
+                    <option value="<%= category._id %>"><%= category.title %></option>
+                <% }) %>
               </select>
             </div>
           </div>
