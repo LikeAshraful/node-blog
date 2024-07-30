@@ -17,6 +17,7 @@ router.post('/store', async (req, res) => {
         description: req.body.description
     });
     await category.save();
+    req.flash('success_msg', 'Category created successfully');
     res.redirect('/categories');
 });
 

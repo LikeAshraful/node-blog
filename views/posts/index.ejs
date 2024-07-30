@@ -8,7 +8,6 @@
 </section>
 
 <section class="section main-section">
-
   <div class="card has-table">
     <div class="card-content">
       <table>
@@ -39,43 +38,48 @@
               </label>
             </td>
             <td class="image-cell">
-            <% if (post.featuredImage) { %>
+              <% if (post.featuredImage) { %>
               <div class="image">
-                  <img src="<%= post.featuredImage %>" alt="<%= post.title %> Featured Image" style="max-width: 200px;">
-                </div>
-                <% } %>
-              </td>
+                <img
+                  src="<%= post.featuredImage %>"
+                  alt="<%= post.title %> Featured Image"
+                  style="max-width: 200px"
+                />
+              </div>
+              <% } %>
+            </td>
             <td><a href="/posts/<%= post._id %>"><%= post.title %></a></td>
             <td><%= post.content.substring(0, 100) %>...</td>
-            <td>
-              <%= post.category ? post.category.title : '' %>
-            </td>
+            <td><%= post.category ? post.category.title : '' %></td>
             <td>
               Tags: <% post.tags.forEach(function(tag) { %>
               <span><%= tag %></span>
               <% }); %>
             </td>
             <td data-label="Created">
-              <small class="text-gray-500" title="<%= post.createdAt  %>">             
+              <small class="text-gray-500" title="<%= post.createdAt  %>">
                 <%= post.createdAt.toISOString().split('T')[0] %>
-            </small>
+              </small>
             </td>
             <td class="actions-cell">
               <div class="buttons nowrap">
                 <a
                   class="button small blue --jb-modal"
-                  href="/posts/<%= post._id %>"
+                  href="/posts/edit/<%= post._id %>"
                   type="button"
                 >
-                  <span class="icon"><i class="mdi mdi-eye"></i></span>
+                  <span class="icon"><i class="mdi mdi-pencil"></i></span>
                 </a>
-                <button
-                  class="button small red --jb-modal"
-                  data-target="sample-modal"
-                  type="button"
+
+                <form
+                  action="/posts/delete/<%= post._id %>"
+                  method="post"
+                  style="display: inline"
                 >
-                  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                </button>
+                  <button class="button small red" type="submit">
+                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                  </button>
+                </form>
               </div>
             </td>
           </tr>

@@ -116,6 +116,65 @@
         </div>
       </section>
 
+      <!-- Flash Messages -->
+      <section class="section main-section"></section>
+      <% if (success_msg && success_msg.length > 0) { %> <%
+      success_msg.forEach(function(msg) { %>
+      <div class="notification blue">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
+        >
+          <div>
+            <span class="icon"><i class="mdi mdi-buffer"></i></span>
+            <b><%= msg %></b>
+          </div>
+          <button
+            type="button"
+            class="button small textual --jb-notification-dismiss"
+          >
+            Dismiss
+          </button>
+        </div>
+      </div>
+      <% }); %> <% } %> <% if (error_msg && error_msg.length > 0) { %> <%
+      error_msg.forEach(function(msg) { %>
+      <div class="notification red">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
+        >
+          <div>
+            <span class="icon"><i class="mdi mdi-buffer"></i></span>
+            <b><%= msg %></b>
+          </div>
+          <button
+            type="button"
+            class="button small textual --jb-notification-dismiss"
+          >
+            Dismiss
+          </button>
+        </div>
+      </div>
+      <% }); %> <% } %> <% if (error && error.length > 0) { %> <%
+      error.forEach(function(msg) { %>
+      <div class="notification red">
+        <div
+          class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
+        >
+          <div>
+            <span class="icon"><i class="mdi mdi-buffer"></i></span>
+            <b><%= msg %></b>
+          </div>
+          <button
+            type="button"
+            class="button small textual --jb-notification-dismiss"
+          >
+            Dismiss
+          </button>
+        </div>
+      </div>
+      <% }); %> <% } %>
+    </section>
+
       <section class="section main-section"><%- body %></section>
 
       <footer class="footer">
@@ -137,10 +196,10 @@
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
     ></script>
-    <script
+    <!-- <script
       type="text/javascript"
       src="/admin-one/js/chart.sample.min.js"
-    ></script>
+    ></script> -->
     <!-- Icons below are for demo only. Feel free to use any icon pack. Docs: https://bulma.io/documentation/elements/icon/ -->
     <link
       rel="stylesheet"

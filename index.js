@@ -11,7 +11,9 @@ require('./config/passport'); // Passport configuration
 const app = express();
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/blogDB');
+mongoose.connect('mongodb://localhost:27017/blogDB')
+    .then(() => console.log('MongoDB connected...'))
+    .catch(err => console.log(err));
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
@@ -26,9 +28,13 @@ app.use(session({
     resave: false,
     saveUninitialized: false
 }));
+
+app.use(flash());
+
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(flash());
+
+
 
 app.use('/uploads', express.static('uploads'));
 
@@ -58,7 +64,6 @@ app.use('/', authRoutes);
 app.use('/', appRoutes);
 app.use('/categories', categoryRoutes);
 app.use('/posts', postRoutes);
-
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {

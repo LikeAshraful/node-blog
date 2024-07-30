@@ -25,8 +25,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
-
-
 router.get('/', async (req, res) => {
     const posts = await Post.find().populate('category').exec();
     res.render('posts/index', { posts: posts });
@@ -55,7 +53,80 @@ router.post('/store', upload.single('featuredImage'), async (req, res) => {
         featuredImage: req.file ? `/uploads/${req.file.filename}` : null
     });
     await post.save();
+    req.flash('success_msg', 'Post Created successfully');
     res.redirect('/posts');
 });
+
+
+router.get('/edit/:id', async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id).populate('category');
+        if (!post) {
+            req.flash('error_msg', 'Post not found');
+            return res.redirect('/posts');
+        }
+        const categories = await Category.find();
+        res.render('posts/edit', { post, categories });
+    } catch (error) {
+        res.status(500).send('Internal Server Error');        
+    }
+});
+
+// Route to handle post update
+router.post('/update/:id', upload.single('featuredImage'), async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            req.flash('error_msg', 'Post not found');
+            return res.redirect('/posts');
+        }
+
+        post.title = req.body.postTitle;
+        post.content = req.body.postContent;
+        post.category = req.body.postCategory;
+        post.tags = req.body.postTags.split(',').map(item => item.trim());
+        
+        if (req.file) {
+            post.featuredImage = `/uploads/${req.file.filename}`;
+        }
+
+        await post.save();
+        req.flash('success_msg', 'Post updated successfully');
+        res.redirect('/posts');
+    } catch (err) {
+        console.error(err); // Debug: Log any errors that occur
+        req.flash('error_msg', 'Failed to update post');
+        res.status(500).send('Server Error');
+    }
+});
+
+router.post('/delete/:id', async (req, res) => {
+    try {
+        const post = await Post.findById(req.params.id);
+        if (!post) {
+            req.flash('error_msg', 'Post not found');
+            return res.redirect('/posts');
+        }
+
+        if (post.featuredImage) {
+            fs.unlink(uploadDir + post.featuredImage, (err) => {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+            });
+        }
+
+        await Post.deleteOne({ _id: req.params.id });
+
+        req.flash('success_msg', 'Post deleted successfully');
+        res.redirect('/posts');
+    } catch (err) {
+        console.error(err); 
+        req.flash('error_msg', 'Failed to delete post');
+        res.status(500).send('Server Error');
+    }
+});
+
 
 module.exports = router;

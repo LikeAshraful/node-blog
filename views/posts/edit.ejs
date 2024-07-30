@@ -1,0 +1,57 @@
+<section class="section main-section">
+    <div class="card mb-6">
+      <header class="card-header">
+        <p class="card-header-title">
+          <span class="icon"><i class="mdi mdi-ballot"></i></span>
+          Edit Post > <span class="strong text-red-500"><%= post.title %></span>
+        </p>
+      </header>
+      <div class="card-content">
+    <form action="/posts/update/<%= post._id %>" method="post" enctype="multipart/form-data">
+        <div class="field">
+            <label class="label">Title</label>
+            <div class="control">
+                <input class="input" type="text" name="postTitle" value="<%= post.title %>" required>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Content</label>
+            <div class="control">
+                <textarea class="textarea" name="postContent" required><%= post.content %></textarea>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Category</label>
+            <div class="control">
+                <div class="select">
+                    <select name="postCategory">
+                        <% categories.forEach(category => { %>
+                            <option value="<%= category._id %>" <%= post.category && post.category._id.equals(category._id) ? 'selected' : '' %>><%= category.title %></option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Tags</label>
+            <div class="control">
+                <input class="input" type="text" name="postTags" value="<%= post.tags.join(', ') %>" placeholder="Separate tags with commas">
+            </div>
+        </div>
+        <div class="field">
+            <label class="label">Featured Image</label>
+            <div class="control">
+                <input type="file" name="featuredImage" accept="image/*">
+                <% if (post.featuredImage) { %>
+                    <p>Current Image: <img src="<%= post.featuredImage %>" alt="Featured Image" style="max-width: 100px;"></p>
+                <% } %>
+            </div>
+        </div>
+
+        <div class="control">
+            <button type="submit" class="button green">Update</button>
+          </div>
+    </form>
+</div>
+</div>
+</section>

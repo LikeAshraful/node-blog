@@ -1,89 +1,82 @@
 <div class="card">
-    <header class="card-header">
-      <p class="card-header-title">
-        <span class="icon"><i class="mdi mdi-lock"></i></span>
-        Register
-      </p>
-    </header>
-    <div class="card-content">
-      <form action="/register" method="post">
+  <header class="card-header">
+    <p class="card-header-title">
+      <span class="icon"><i class="mdi mdi-lock"></i></span>
+      Register
+    </p>
+  </header>
+  <div class="card-content">
+    <form action="/register" method="post">
+      <div class="field spaced">
+        <label class="label">User Name</label>
+        <div class="control icons-left">
+          <input
+            class="input"
+            type="text"
+            name="username"
+            placeholder="Username"
+            autocomplete="username"
+          />
+          <span class="icon is-small left"
+            ><i class="mdi mdi-account"></i
+          ></span>
+        </div>
+      </div>
 
-        <div class="field spaced">
-          <label class="label">User Name</label>
-          <div class="control icons-left">
-            <input
-              class="input"
-              type="text"
-              name="username"
-              placeholder="Username"
-              autocomplete="username"
-            />
-            <span class="icon is-small left"
-              ><i class="mdi mdi-account"></i
-            ></span>
-          </div>
+      <div class="field spaced">
+        <label class="label">Email</label>
+        <div class="control icons-left">
+          <input
+            class="input"
+            type="email"
+            name="email"
+            placeholder="Email"
+            autocomplete="email"
+          />
+          <span class="icon is-small left"><i class="mdi mdi-mail"></i></span>
         </div>
+      </div>
 
-        <div class="field spaced">
-          <label class="label">Email</label>
-          <div class="control icons-left">
-            <input
-              class="input"
-              type="email"
-              name="email"
-              placeholder="Email"
-              autocomplete="email"
-            />
-            <span class="icon is-small left"
-              ><i class="mdi mdi-mail"></i
-            ></span>
-          </div>
+      <div class="field spaced">
+        <label class="label">Phone No</label>
+        <div class="control icons-left">
+          <input
+            class="input"
+            type="text"
+            name="phone"
+            placeholder="Phone No"
+            autocomplete="phone"
+          />
+          <span class="icon is-small left"><i class="mdi mdi-phone"></i></span>
         </div>
+      </div>
 
-        <div class="field spaced">
-          <label class="label">Phone No</label>
-          <div class="control icons-left">
-            <input
-              class="input"
-              type="text"
-              name="phone"
-              placeholder="Phone No"
-              autocomplete="phone"
-            />
-            <span class="icon is-small left"
-              ><i class="mdi mdi-phone"></i
-            ></span>
-          </div>
+      <div class="field spaced">
+        <label class="label">Password</label>
+        <p class="control icons-left">
+          <input
+            class="input"
+            type="password"
+            name="password"
+            placeholder="Password"
+            autocomplete="current-password"
+          />
+          <span class="icon is-small left"
+            ><i class="mdi mdi-asterisk"></i
+          ></span>
+        </p>
+      </div>
+
+      <hr />
+
+      <div class="field grouped">
+        <div class="control">
+          <button type="submit" class="button blue">Sign Up</button>
         </div>
-  
-        <div class="field spaced">
-          <label class="label">Password</label>
-          <p class="control icons-left">
-            <input
-              class="input"
-              type="password"
-              name="password"
-              placeholder="Password"
-              autocomplete="current-password"
-            />
-            <span class="icon is-small left"
-              ><i class="mdi mdi-asterisk"></i
-            ></span>
-          </p>
-        </div> 
-        
-  
-        <hr />
-  
-        <div class="field grouped">
-          <div class="control">
-            <button type="submit" class="button blue">Sign Up</button>
-          </div>
-          <div class="control">
-            <a href="/login" class="button"> Already Have account? Login</a>
-          </div>
+        <div class="control">
+          <a href="/login" class="button"> Already Have account? Login</a>
         </div>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
-  
+</div>
