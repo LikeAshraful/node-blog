@@ -7,7 +7,7 @@
       </p>
     </header>
     <div class="card-content">
-      <form action="/post/store" method="post">
+      <form action="/posts/store" method="post" enctype="multipart/form-data">
         <div class="field">
           <div class="field-body">
             <div class="field">
@@ -31,7 +31,9 @@
             <div class="select">
               <select name="postCategory">
                 <% categories.forEach(category => { %>
-                    <option value="<%= category._id %>"><%= category.title %></option>
+                <option value="<%= category._id %>">
+                  <%= category.title %>
+                </option>
                 <% }) %>
               </select>
             </div>
@@ -58,6 +60,13 @@
               name="postTags"
               placeholder="Tags"
             />
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Featured Image</label>
+          <div class="control">
+            <input type="file" name="featuredImage" accept="image/*" />
           </div>
         </div>
 

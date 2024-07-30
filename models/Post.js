@@ -8,6 +8,7 @@ const postSchema = new Schema({
         type:Schema.Types.ObjectId,
         ref:'Category'
     },
+    featuredImage: String,
     tags: [String],
     createdAt: {
         type: Date,

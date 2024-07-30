@@ -3,7 +3,7 @@
     class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
   >
     <h1 class="title">Posts</h1>
-    <a href="/post/create" class="button light">Create New Post</a>
+    <a href="/posts/create" class="button light">Create New Post</a>
   </div>
 </section>
 
@@ -20,7 +20,7 @@
                 <span class="check"></span>
               </label>
             </th>
-            <th class="image-cell"></th>
+            <th class="image-cell">Image</th>
             <th>Title</th>
             <th>Description</th>
             <th>Category</th>
@@ -39,13 +39,12 @@
               </label>
             </td>
             <td class="image-cell">
+            <% if (post.featuredImage) { %>
               <div class="image">
-                <img
-                  src="https://avatars.dicebear.com/v2/initials/rebecca-bauch.svg"
-                  class="rounded-full"
-                />
-              </div>
-            </td>
+                  <img src="<%= post.featuredImage %>" alt="<%= post.title %> Featured Image" style="max-width: 200px;">
+                </div>
+                <% } %>
+              </td>
             <td><a href="/posts/<%= post._id %>"><%= post.title %></a></td>
             <td><%= post.content.substring(0, 100) %>...</td>
             <td>

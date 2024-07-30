@@ -30,6 +30,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
+app.use('/uploads', express.static('uploads'));
+
 app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
@@ -49,11 +51,13 @@ app.use((req, res, next) => {
 const authRoutes = require('./routes/auth');
 const appRoutes = require('./routes/route');
 const categoryRoutes = require('./routes/category');
+const postRoutes = require('./routes/post');
 
 // Use routes
 app.use('/', authRoutes);
 app.use('/', appRoutes);
 app.use('/categories', categoryRoutes);
+app.use('/posts', postRoutes);
 
 
 const PORT = process.env.PORT || 3000;
