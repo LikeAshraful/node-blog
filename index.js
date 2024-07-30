@@ -48,16 +48,15 @@ app.use((req, res, next) => {
 // Routes
 const authRoutes = require('./routes/auth');
 const appRoutes = require('./routes/route');
+const categoryRoutes = require('./routes/category');
 
+// Use routes
 app.use('/', authRoutes);
 app.use('/', appRoutes);
+app.use('/categories', categoryRoutes);
 
 
-app.get('/categories/:category', async (req, res) => {
-    const posts = await Post.find({ categories: req.params.category });
-    res.render('home', { posts: posts });
-});
-
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });

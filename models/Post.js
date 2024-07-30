@@ -1,10 +1,13 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-
-const postSchema = new mongoose.Schema({
+const postSchema = new Schema({
     title: String,
     content: String,
-    categories: [String],
+    category: {
+        type:Schema.Types.ObjectId,
+        ref:'Category'
+    },
     tags: [String],
     createdAt: {
         type: Date,

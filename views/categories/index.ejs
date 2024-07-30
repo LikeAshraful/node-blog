@@ -1,0 +1,81 @@
+<section class="is-hero-bar">
+  <div
+    class="flex flex-col md:flex-row items-center justify-between space-y-6 md:space-y-0"
+  >
+    <h1 class="title">Categories</h1>
+    <a href="/categories/create" class="button light">Create New Category</a>
+  </div>
+</section>
+
+<section class="section main-section">
+
+  <div class="card has-table">
+    <div class="card-content">
+      <table>
+        <thead>
+          <tr>
+            <th class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" />
+                <span class="check"></span>
+              </label>
+            </th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Created At</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% categories.forEach(function(category) { %>
+          <tr>
+            <td class="checkbox-cell">
+              <label class="checkbox">
+                <input type="checkbox" />
+                <span class="check"></span>
+              </label>
+            </td>
+            
+            <td><a href="/categories/<%= category._id %>"><%= category.title %></a></td>
+            <td><%= category?.description?.substring(0, 100) %>...</td>
+       
+            <td data-label="Created">
+              <small class="text-gray-500" title="<%= category.createdAt  %>">             
+                <%= category?.createdAt?.toISOString().split('T')[0] %>
+            </small>
+            </td>
+            <td class="actions-cell">
+              <div class="buttons  nowrap">
+                <a class="button small blue --jb-modal"
+                  href="/categories/<%= category._id %>"
+                  type="button"
+                >
+                  <span class="icon"><i class="mdi mdi-pencil"></i></span>
+                </a>
+                <button
+                  class="button small red --jb-modal"
+                  data-target="sample-modal"
+                  type="button"
+                >
+                  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                </button>
+              </div>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+
+      <!-- <div class="table-pagination">
+        <div class="flex items-center justify-between">
+          <div class="buttons">
+            <button type="button" class="button active">1</button>
+            <button type="button" class="button">2</button>
+            <button type="button" class="button">3</button>
+          </div>
+          <small>Page 1 of 3</small>
+        </div>
+      </div> -->
+    </div>
+  </div>
+</section>
