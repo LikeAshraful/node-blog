@@ -8,7 +8,6 @@
 </section>
 
 <section class="section main-section">
-
   <div class="card has-table">
     <div class="card-content">
       <table>
@@ -27,7 +26,7 @@
           </tr>
         </thead>
         <tbody>
-          <% categories.forEach(function(category) { %>
+          <% categories.documents.forEach(function(category) { %>
           <tr>
             <td class="checkbox-cell">
               <label class="checkbox">
@@ -35,18 +34,23 @@
                 <span class="check"></span>
               </label>
             </td>
-            
-            <td><a href="/categories/<%= category._id %>"><%= category.title %></a></td>
+
+            <td>
+              <a href="/categories/<%= category._id %>"
+                ><%= category.title %></a
+              >
+            </td>
             <td><%= category?.description?.substring(0, 100) %>...</td>
-       
+
             <td data-label="Created">
-              <small class="text-gray-500" title="<%= category.createdAt  %>">             
+              <small class="text-gray-500" title="<%= category.createdAt  %>">
                 <%= category?.createdAt?.toISOString().split('T')[0] %>
-            </small>
+              </small>
             </td>
             <td class="actions-cell">
-              <div class="buttons  nowrap">
-                <a class="button small blue --jb-modal"
+              <div class="buttons nowrap">
+                <a
+                  class="button small blue --jb-modal"
                   href="/categories/edit/<%= category._id %>"
                   type="button"
                 >
@@ -68,16 +72,7 @@
         </tbody>
       </table>
 
-      <!-- <div class="table-pagination">
-        <div class="flex items-center justify-between">
-          <div class="buttons">
-            <button type="button" class="button active">1</button>
-            <button type="button" class="button">2</button>
-            <button type="button" class="button">3</button>
-          </div>
-          <small>Page 1 of 3</small>
-        </div>
-      </div> -->
+      <%- include('../partials/pagination', { pagination: categories, url:"categories" }) %>
     </div>
   </div>
 </section>

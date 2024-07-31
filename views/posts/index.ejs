@@ -29,7 +29,7 @@
           </tr>
         </thead>
         <tbody>
-          <% posts.forEach(function(post) { %>
+          <% posts.documents.forEach(function(post) { %>
           <tr>
             <td class="checkbox-cell">
               <label class="checkbox">
@@ -87,16 +87,8 @@
         </tbody>
       </table>
 
-      <!-- <div class="table-pagination">
-        <div class="flex items-center justify-between">
-          <div class="buttons">
-            <button type="button" class="button active">1</button>
-            <button type="button" class="button">2</button>
-            <button type="button" class="button">3</button>
-          </div>
-          <small>Page 1 of 3</small>
-        </div>
-      </div> -->
+      <%- include('../partials/pagination', { pagination: posts, url:"posts" }) %>
+
     </div>
   </div>
 </section>

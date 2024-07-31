@@ -5,6 +5,8 @@ const router = express.Router();
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const paginate = require('../helpers/paginate');
+
 
 
 
@@ -26,7 +28,9 @@ const upload = multer({ storage: storage });
 
 
 router.get('/', async (req, res) => {
-    const posts = await Post.find().populate('category').exec();
+    // const posts = await Post.find().populate('category').exec();
+    const page = parseInt(req.query.page) || 1;
+    const posts = await paginate(Post, page, 10, 'category');
     res.render('posts/index', { posts: posts });
 });
 

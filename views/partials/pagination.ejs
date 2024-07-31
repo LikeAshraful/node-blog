@@ -1,0 +1,28 @@
+<% if(pagination.totalPages>1){ %>
+<div class="table-pagination">
+    <div class="flex items-center justify-between">
+      
+
+      <div class="buttons">
+        <% if (pagination.hasPrevPage) { %>
+          <a href="/<%=url%>?page=<%= pagination.prevPage %>" class="button">Previous</a>
+          <% } %>
+
+        <% for (let i = 1; i <= pagination.totalPages; i++) { %>
+        
+        <a
+          href="/<%=url%>?page=<%= i %>"
+          class="button <%= pagination.currentPage === i ? 'active' : '' %>"
+          ><%= i %></a
+        >
+        <% } %>
+
+        <% if (pagination.hasNextPage) { %>
+          <a href="/<%=url%>?page=<%= pagination.nextPage %>" class="button">Next</a>
+          <% } %>
+      </div>      
+
+      <small>Page <%= pagination.currentPage %> of <%= pagination.totalPages %></small>
+    </div>
+  </div>
+  <% } %>

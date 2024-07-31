@@ -1,9 +1,12 @@
 const express = require('express');
 const Category = require('../models/Category');
 const router = express.Router();
+const paginate = require('../helpers/paginate');
 
 router.get('/', async (req, res) => {
-    const categories = await Category.find();
+    // const categories = await Category.find();
+    const page = parseInt(req.query.page) || 1;
+    const categories = await paginate(Category, page, 10);
     res.render('categories/index', { categories: categories });
 });
 
