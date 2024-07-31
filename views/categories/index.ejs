@@ -47,18 +47,20 @@
             <td class="actions-cell">
               <div class="buttons  nowrap">
                 <a class="button small blue --jb-modal"
-                  href="/categories/<%= category._id %>"
+                  href="/categories/edit/<%= category._id %>"
                   type="button"
                 >
                   <span class="icon"><i class="mdi mdi-pencil"></i></span>
                 </a>
-                <button
-                  class="button small red --jb-modal"
-                  data-target="sample-modal"
-                  type="button"
+                <form
+                  action="/categories/delete/<%= category._id %>"
+                  method="post"
+                  style="display: inline"
                 >
-                  <span class="icon"><i class="mdi mdi-trash-can"></i></span>
-                </button>
+                  <button class="button small red" type="submit">
+                    <span class="icon"><i class="mdi mdi-trash-can"></i></span>
+                  </button>
+                </form>
               </div>
             </td>
           </tr>

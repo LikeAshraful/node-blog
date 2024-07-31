@@ -21,4 +21,48 @@ router.post('/store', async (req, res) => {
     res.redirect('/categories');
 });
 
+router.get('/edit/:id', async (req, res) => {
+    const category = await Category.findById(req.params.id)
+    if(!category) {
+       req.flash('error_msg', 'Category not found');
+       req.redirect('/categories') 
+    }
+
+    res.render('categories/edit', {category})
+});
+
+router.post('/update/:id', async (req, res) => {
+    const category = await Category.findById(req.params.id);
+    if(!category){
+        req.flash('error_msg', 'Category not found');
+        req.redirect('/categories');
+    }
+
+    category.title = req.body.title;
+    category.description = req.body.description;
+
+    await category.save();
+    req.flash('success_msg', 'Successfully category updated');
+    res.redirect('/categories');
+});
+
+
+router.post('/delete/:id', async (req, res) => {
+    try {
+        const category = await Category.findById(req.params.id);
+        if (!category) {
+            req.flash('error_msg', 'Category not found');
+            return res.redirect('/categories');
+        } 
+        await category.deleteOne({ _id: req.params.id });
+
+        req.flash('success_msg', 'Category deleted successfully');
+        res.redirect('/categories');
+    } catch (err) {
+        console.error(err); 
+        req.flash('error_msg', 'Failed to delete category');
+        res.status(500).send('Server Error');
+    }
+});
+
 module.exports = router;
