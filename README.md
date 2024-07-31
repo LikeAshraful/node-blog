@@ -15,13 +15,12 @@ This is a simple blog application built with Node.js, Express.js, and MongoDB.
 
 1. **Clone the repository**
 
-   ```sh
-   git clone https://github.com/yourusername/node-blog.git
+```sh
+   git clone https://github.com/likeashraful/node-blog.git
    cd node-blog
-   npm install
-   npm start
 ```
-2. **Install the dependencies
+2. **Install the dependencies**
+
 ```sh
    npm install
 ```
