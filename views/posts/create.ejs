@@ -43,13 +43,19 @@
         <div class="field">
           <label class="label">Post Detail</label>
           <div class="control">
-            <textarea
-              class="textarea"
+            <!-- <textarea
+              id="editor"
+              class="textarea editor"
               name="postContent"
               placeholder="Post Detail"
-            ></textarea>
+            ></textarea> -->
+
+            <div id="editor-container" class="editor-container" style="min-height: 300px;"></div>
+            <input type="hidden" name="postContent" id="content">
           </div>
         </div>
+
+
 
         <div class="field">
           <label class="label">Tags</label>
@@ -58,7 +64,7 @@
               class="input"
               type="text"
               name="postTags"
-              placeholder="Tags"
+              placeholder="Tags (comma separated: tag1, tag2, tag3)"
             />
           </div>
         </div>

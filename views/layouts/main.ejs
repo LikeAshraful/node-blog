@@ -8,6 +8,7 @@
 
     <!-- Tailwind is included -->
     <link rel="stylesheet" href="/admin-one/css/main.css?v=1652870200386" />
+    <link rel="stylesheet" href="/vendor/quill/quill.snow.css" />
 
     <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
     <link
@@ -27,7 +28,6 @@
       href="/admin-one/safari-pinned-tab.svg"
       color="#00b4b6"
     />
-
     <meta name="description" content="dashboard" />
     <meta property="og:description" content="dashboard" />
   </head>
@@ -118,62 +118,62 @@
 
       <!-- Flash Messages -->
       <section class="section main-section">
-      <% if (success_msg && success_msg.length > 0) { %> <%
-      success_msg.forEach(function(msg) { %>
-      <div class="notification blue">
-        <div
-          class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
-        >
-          <div>
-            <span class="icon"><i class="mdi mdi-buffer"></i></span>
-            <b><%= msg %></b>
-          </div>
-          <button
-            type="button"
-            class="button small textual --jb-notification-dismiss"
+        <% if (success_msg && success_msg.length > 0) { %> <%
+        success_msg.forEach(function(msg) { %>
+        <div class="notification blue">
+          <div
+            class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
           >
-            Dismiss
-          </button>
-        </div>
-      </div>
-      <% }); %> <% } %> <% if (error_msg && error_msg.length > 0) { %> <%
-      error_msg.forEach(function(msg) { %>
-      <div class="notification red">
-        <div
-          class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
-        >
-          <div>
-            <span class="icon"><i class="mdi mdi-buffer"></i></span>
-            <b><%= msg %></b>
+            <div>
+              <span class="icon"><i class="mdi mdi-buffer"></i></span>
+              <b><%= msg %></b>
+            </div>
+            <button
+              type="button"
+              class="button small textual --jb-notification-dismiss"
+            >
+              Dismiss
+            </button>
           </div>
-          <button
-            type="button"
-            class="button small textual --jb-notification-dismiss"
-          >
-            Dismiss
-          </button>
         </div>
-      </div>
-      <% }); %> <% } %> <% if (error && error.length > 0) { %> <%
-      error.forEach(function(msg) { %>
-      <div class="notification red">
-        <div
-          class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
-        >
-          <div>
-            <span class="icon"><i class="mdi mdi-buffer"></i></span>
-            <b><%= msg %></b>
+        <% }); %> <% } %> <% if (error_msg && error_msg.length > 0) { %> <%
+        error_msg.forEach(function(msg) { %>
+        <div class="notification red">
+          <div
+            class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
+          >
+            <div>
+              <span class="icon"><i class="mdi mdi-buffer"></i></span>
+              <b><%= msg %></b>
+            </div>
+            <button
+              type="button"
+              class="button small textual --jb-notification-dismiss"
+            >
+              Dismiss
+            </button>
           </div>
-          <button
-            type="button"
-            class="button small textual --jb-notification-dismiss"
-          >
-            Dismiss
-          </button>
         </div>
-      </div>
-      <% }); %> <% } %>
-    </section>
+        <% }); %> <% } %> <% if (error && error.length > 0) { %> <%
+        error.forEach(function(msg) { %>
+        <div class="notification red">
+          <div
+            class="flex flex-col md:flex-row items-center justify-between space-y-3 md:space-y-0"
+          >
+            <div>
+              <span class="icon"><i class="mdi mdi-buffer"></i></span>
+              <b><%= msg %></b>
+            </div>
+            <button
+              type="button"
+              class="button small textual --jb-notification-dismiss"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+        <% }); %> <% } %>
+      </section>
 
       <section class="section main-section"><%- body %></section>
 
@@ -196,10 +196,24 @@
       type="text/javascript"
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
     ></script>
-    <!-- <script
-      type="text/javascript"
-      src="/admin-one/js/chart.sample.min.js"
-    ></script> -->
+
+    <script src="/vendor/quill/quill.js" referrerpolicy="origin"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        var quill = new Quill(".editor-container", {
+          theme: "snow",
+
+        });
+
+        var form = document.querySelector("form");
+        form.onsubmit = function () {
+          // Populate hidden form on submit
+          var content = document.querySelector("input[name=postContent]");
+          content.value = quill.root.innerHTML;
+        };
+      });
+    </script>
+
     <!-- Icons below are for demo only. Feel free to use any icon pack. Docs: https://bulma.io/documentation/elements/icon/ -->
     <link
       rel="stylesheet"
