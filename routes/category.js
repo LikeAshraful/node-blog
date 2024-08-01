@@ -17,7 +17,8 @@ router.get('/create', (req, res) => {
 router.post('/store', async (req, res) => {
     const category = new Category({
         title: req.body.title,
-        description: req.body.description
+        description: req.body.description,
+        isMenu: req.body.isMenu ? true : false
     });
     await category.save();
     req.flash('success_msg', 'Category created successfully');
@@ -35,6 +36,7 @@ router.get('/edit/:id', async (req, res) => {
 });
 
 router.post('/update/:id', async (req, res) => {
+    console.log(req.body);
     const category = await Category.findById(req.params.id);
     if(!category){
         req.flash('error_msg', 'Category not found');
@@ -43,6 +45,7 @@ router.post('/update/:id', async (req, res) => {
 
     category.title = req.body.title;
     category.description = req.body.description;
+    category.isMenu = req.body.isMenu ? true : false;
 
     await category.save();
     req.flash('success_msg', 'Successfully category updated');

@@ -9,6 +9,8 @@ const dayjs = require('dayjs');
 require('dotenv').config();
 require('./config/passport'); // Passport configuration
 
+const menus = require('./middlewares/menu');
+
 const app = express();
 
 // Connect to MongoDB
@@ -22,6 +24,8 @@ app.set('view engine', 'ejs');
 app.use(expressLayouts);
 
 app.set('layout', 'layouts/main');
+app.use(menus);
+
 
 // Session and Passport middleware
 app.use(session({

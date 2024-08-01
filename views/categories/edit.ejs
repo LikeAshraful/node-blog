@@ -33,16 +33,30 @@
               class="textarea"
               name="description"
               placeholder="Description"
-            ><%= category.description %></textarea>
+            >
+<%= category.description %></textarea
+            >
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Is Menu</label>
+          <div class="field-body">
+            <div class="field">
+              <label class="switch">
+                <input type="checkbox" value="<%= category.isMenu ? 'true' :
+                'false' %>" name="isMenu" <%= category.isMenu ? 'checked' : ''
+                %>>
+                <span class="check"></span>
+                <span class="control-label">Is Menu</span>
+              </label>
+            </div>
           </div>
         </div>
 
         <div class="field grouped">
           <div class="control">
             <button type="submit" class="button green">Submit</button>
-          </div>
-          <div class="control">
-            <button type="reset" class="button red">Reset</button>
           </div>
         </div>
       </form>
