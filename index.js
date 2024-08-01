@@ -36,7 +36,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 
-
 app.use('/uploads', express.static('uploads'));
 
 app.use((req, res, next) => {
@@ -48,7 +47,7 @@ app.use((req, res, next) => {
 });
 
 // Define public routes
-const publicRoutes = ['/', '/login', '/register'];
+const publicRoutes = ['/', /^\/detail\/.*/, '/login', '/register'];
 
 // Ensure Authentication middleware
 const { ensureAuthenticated } = require('./middlewares/auth');

@@ -6,12 +6,14 @@ const router = express.Router();
 
 
 router.get('/', async (req, res) => {
-
     const page = parseInt(req.query.page) || 1;
     const latestPosts  = await paginate(Post, page, 10, 'category');
-
     res.render('frontend/home', {latestPosts: latestPosts, title : 'home', layout : 'frontend/layouts/main'});
+});
 
+router.get('/detail/:id', async (req, res) => {
+    const post = await Post.findById(req.params.id).populate('category');
+    res.render('frontend/detail', {post: post, title : post.title, layout : 'frontend/layouts/main'});
 });
 
 
