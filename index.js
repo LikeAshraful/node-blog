@@ -5,6 +5,7 @@ const expressLayouts = require('express-ejs-layouts');
 const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
+const dayjs = require('dayjs');
 require('dotenv').config();
 require('./config/passport'); // Passport configuration
 
@@ -42,12 +43,17 @@ app.use((req, res, next) => {
     res.locals.success_msg = req.flash('success_msg');
     res.locals.error_msg = req.flash('error_msg');
     res.locals.error = req.flash('error');
+    res.locals.dayjs = dayjs;
     next();
 });
 
+// Define public routes
+const publicRoutes = ['/', '/login', '/register'];
+
+// Ensure Authentication middleware
 const { ensureAuthenticated } = require('./middlewares/auth');
 app.use((req, res, next) => {
-    if (req.path === '/login' || req.path === '/register') {
+    if (publicRoutes.some(route => typeof route === 'string' ? req.path === route : route.test(req.path))) {
         return next();
     }
     ensureAuthenticated(req, res, next);

@@ -54,7 +54,8 @@ router.post('/store', upload.single('featuredImage'), async (req, res) => {
         content: req.body.postContent,
         category: req.body.postCategory,
         tags: req.body.postTags.split(',').map(item => item.trim()),
-        featuredImage: req.file ? `/uploads/${req.file.filename}` : null
+        featuredImage: req.file ? `/uploads/${req.file.filename}` : null,
+        author: req.author ?? 'Admin'
     });
     await post.save();
     req.flash('success_msg', 'Post Created successfully');
@@ -89,6 +90,7 @@ router.post('/update/:id', upload.single('featuredImage'), async (req, res) => {
         post.content = req.body.postContent;
         post.category = req.body.postCategory;
         post.tags = req.body.postTags.split(',').map(item => item.trim());
+        post.author = req.body.author ?? 'Admin';
         
         if (req.file) {
             post.featuredImage = `/uploads/${req.file.filename}`;

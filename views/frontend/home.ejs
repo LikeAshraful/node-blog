@@ -1,0 +1,45 @@
+
+  <section class="w-full md:w-2/3 flex flex-col items-center px-3">
+    <% latestPosts.documents.forEach(function(post) { %>
+
+    <article class="flex flex-col shadow my-4" style="width: 100%;">
+      <!-- Article Image -->
+      <% if (post.featuredImage) { %>
+      <a style="width: 100%;"  href="#" class="hover:opacity-75">
+        <img style="max-height: 300px; width:100% ;" src=" <%= post.featuredImage %>" />
+      </a>
+      <% } %>
+      <div class="bg-white flex flex-col justify-start p-6">
+        <a href="#" class="text-blue-700 text-sm font-bold uppercase pb-4"
+          ><%= post.category.title %></a
+        >
+        <a href="#" class="text-3xl font-bold hover:text-gray-700 pb-4"
+          ><%= post.title %></a
+        >
+        <p href="#" class="text-sm pb-3">
+          By
+          <a href="#" class="font-semibold hover:text-gray-800"><%= post.author ?? 'Admin' %></a>,
+          Published on <%= dayjs(post.createdAt).format('MMMM D, YYYY h:mm A') %>
+        </p>
+        <a href="#" class="pb-6"
+          >
+          <%- post.content.substring(0, 300) %>
+          </a
+        >
+        <a href="#" class="uppercase text-gray-800 hover:text-black"
+          >Continue Reading <i class="fas fa-arrow-right"></i
+        ></a>
+      </div>
+    </article>
+
+    <% }); %>
+
+    <!-- Pagination -->
+    <!-- <div class="flex items-center py-8">
+              <a href="#" class="h-10 w-10 bg-blue-800 hover:bg-blue-600 font-semibold text-white text-sm flex items-center justify-center">1</a>
+              <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:bg-blue-600 hover:text-white text-sm flex items-center justify-center">2</a>
+              <a href="#" class="h-10 w-10 font-semibold text-gray-800 hover:text-gray-900 text-sm flex items-center justify-center ml-3">Next <i class="fas fa-arrow-right ml-2"></i></a>
+          </div> -->
+  </section>
+
+  
